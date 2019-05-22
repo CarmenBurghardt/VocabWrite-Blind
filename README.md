@@ -1,2 +1,0 @@
-# VocabWrite-Blind
-first protoype
