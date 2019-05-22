@@ -10,10 +10,10 @@ if(countItem == 0){
 }
 
 function updateItem(countItem){
-	let articleNext = document.getElementById('article');
-	let itemNext = document.getElementById('item');
-	
-      	let nextItem= items[countItem].item;
+  let articleNext = document.getElementById('article');
+  let itemNext = document.getElementById('item');
+  
+        let nextItem= items[countItem].item;
         let nextAritcle=  items[countItem].article;    
         //display item 
          document.getElementById('item').innerHTML= nextItem ;
@@ -50,14 +50,42 @@ function compareAwnser(){
   
 
   console.log("Start compare awnser");
-	if(inputValue.value == items[countItem].word ){
+  if(inputValue.value == items[countItem].word ){
   
     //give feedback
       giveFeedback(true);
 
       }else{ 
-     	giveFeedback(false);  
+      giveFeedback(false);  
      }
+
+
+
+
+  //    let mistake = 0;
+  // correctAwnser = correctAwnser.split('');
+  // let submitAwnser = inputValue.split('');
+  // let mistakenLetters;
+
+  // // compare for length
+  // if(correctAwnser.length !== submitAwnser.length){
+  // alert("äwnser is wrong");
+  // return;
+  // }
+
+  // for(let i=0; i< correctAwnser.length; i++ ){
+    
+  //   if(correctAwnser[i]!== submitAwnser[i]){
+  //     mistake++;
+  //     mistakenLetters= submitAwnser[i];
+  //   }
+    
+  // }  
+  // if (mistake ==1 ){
+
+  //     alert("the awnser is wrong, look at these letter" + mistakenLetters);
+  //   }
+
 }
 
 
@@ -82,13 +110,13 @@ let statusAwnser= true;
 
 function giveFeedback(statusAwnser){
   console.log("feedback");
-	if(statusAwnser){
-		alert("your awnser is right");
+  if(statusAwnser){
+    alert("your awnser is right");
     updateScreen();
      
-	}else{
-		 return alert("your awnser is wrong");
-	}
+  }else{
+     return alert("your awnser is wrong");
+  }
 
 }
 
@@ -109,8 +137,8 @@ function updateScreen(){
 let newAwnser = [];
 
 function saveAwnsers(){
-	let value = document.getElementById('inputvalue').value;
-	newAwnser.push(value);
-	console.log(newAwnser);
+  let value = document.getElementById('inputvalue').value;
+  newAwnser.push(value);
+  console.log(newAwnser);
 } 
 
