@@ -1,4 +1,4 @@
-var items = [
+const items = [
     {
        item: 'the fruit',
         article:'la',
