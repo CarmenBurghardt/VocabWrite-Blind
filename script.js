@@ -17,6 +17,7 @@ let score=0;
 let idScore= document.getElementById("score");
 //Skip button 
 let skipButton = document.getElementById('skipButton');
+let tryAgainId= document.getElementById('tryAgainButton');
 
 
 // If nothing is loaded on the screen load the first tiem
@@ -61,31 +62,10 @@ function updateItem(countItem){
   }
 }
 
-// plays sounds fitting to the fitting item
-function playSound(){
-  // read new audio from item.js
-      let newAudio = new Audio(items[countItem].audio);
-      newAudio.play(newAudio);
-}
 
 
-// update prog
-function updateProgressbar(){
-  // calculate what exercise is in lesson
-  lessonNumber++;
-  // display progress
-  progress.innerHTML ="Progress" + lessonNumber ;
-}
 
 
-// everytime awnser is right, update score with 3
-function updateScore(){
-  // calculate score
-  score= score+3;
-
-  // dipaly score
-  idScore.innerHTML= "Score: " + score;
-}
 
 
 // compares the awnser from the user with the correct one
@@ -108,15 +88,32 @@ function compareAwnser(){
 
   //create new button for skipping,next
   let button = document.createElement("button");
+  let buttonTryAgain = document.createElement("tryAgainButton");
 
   // style button 
   button.classList.add("btn");
   button.classList.add("btn-secondary");
   button.classList.add("mt-5");
-     
+ 
+  buttonTryAgain.classList.add("btn");
+  buttonTryAgain.classList.add("btn-secondary");
+  buttonTryAgain.classList.add("mt-5");
+ 
+  
+  
+function playSound(){
+  let audio = new Audio('fruta.mp3');
+    audio.play();
+}
+
+
+
   // // compare for length, if length not the same awnser is wrong
   if(correctAwnser.length !== submitAwnser.length){
-    giveFeedback("the awnser is not correct, please try again");
+      onOverlay();
+      giveFeedback("the awnser is not correct, please try again");
+   
+    
   }
 
   
@@ -133,31 +130,46 @@ function compareAwnser(){
    }  // if you make 1 mistake you have it almost correct
     if (mistake ==1 ){
       //positionWrongLetter++;
-      
+      onOverlay();
       giveFeedback("You were almost correct. Please improve your awnser or press skip");
       console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
       button.innerHTML = "skip";
+      buttonTryAgain.innerHTML="try again";
       // 2. Append somewhere
      
       skipButton.appendChild(button);
+      tryAgainId.appendChild(buttonTryAgain);
+
+
       // 3. Add event handler
       button.addEventListener ("click", function() {
         skipButton.removeChild(button);
         updateScreen();
         });
 
+      buttonTryAgain.addEventListener ("click", function() {
+        skipButton.removeChild(button);
+        tryAgainId.removeChild(buttonTryAgain);
+        offOverlay();
+        });
+
+
+
+
       inputValue.addEventListener('keypress',function(e){
         if(e.keyCode ==13){
         e.preventDefault();
+         focusMethod();
         skipButton.removeChild(button);
+
         }
       });
-     
+     //
     }
     // if you make no mistakes
      if(mistake ==0){
        document.getElementById("inputvalue").disabled = true;
-
+      onOverlay();
       giveFeedback("The awnser is correct,please press next");
        button.innerHTML = "next";
       // 2. Append somewhere
@@ -167,6 +179,7 @@ function compareAwnser(){
       button.addEventListener ("click", function() {
         skipButton.removeChild(button);
         updateScreen();
+        focusMethod();
     
       });
 
@@ -182,6 +195,20 @@ function compareAwnser(){
 
 
 
+focusMethod = function getFocus() {           
+  document.getElementById("item").focus();
+}
+
+
+
+function onOverlay() {
+  document.getElementById("overlay").style.display = "block";
+   document.getElementById("button").disabled = true;
+}
+
+function offOverlay() {
+  document.getElementById("overlay").style.display = "none";
+}
 
 
 //TODO: scaffolding
@@ -226,6 +253,8 @@ function updateScreen() {
   // clear feedback
   giveFeedback("");
 
+  //clear overlay
+  offOverlay();
   // update next item 
   countItem++;
  
