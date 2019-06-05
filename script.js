@@ -48,9 +48,7 @@ function updateItem(countItem){
   //display item 
   itemId .innerHTML= nextItem ;
 
-  // display article
-  articleId.textContent = nextAritcle + " ";
-        
+
    // clear screen in inputfield
   inputValue.value = '';
       
@@ -99,20 +97,24 @@ function compareAwnser(){
   buttonTryAgain.classList.add("btn-secondary");
   buttonTryAgain.classList.add("mt-5");
  
-  
-  
-function playSound(){
-  let audio = new Audio('fruta.mp3');
-    audio.play();
-}
-
-
-
   // // compare for length, if length not the same awnser is wrong
   if(correctAwnser.length !== submitAwnser.length){
-      onOverlay();
-      giveFeedback("the awnser is not correct, please try again");
+    
+    onOverlay();
+    button.innerHTML = "try again";
+    // 2. Append somewhere
    
+    skipButton.appendChild(button);
+    // 3. Add event handler
+
+    giveFeedback("Not correct, but you are getting there, please try again ");
+    button.addEventListener ("click", function() {
+      skipButton.removeChild(button);
+      updateScreen();
+      focusMethod();
+  
+    });
+      
     
   }
 
@@ -152,10 +154,6 @@ function playSound(){
         tryAgainId.removeChild(buttonTryAgain);
         offOverlay();
         });
-
-
-
-
       inputValue.addEventListener('keypress',function(e){
         if(e.keyCode ==13){
         e.preventDefault();
@@ -187,10 +185,70 @@ function playSound(){
 
       // awnser is also wrong when more than 1 mistake is made
     if(mistake >1){
+      giveFeedback("Not correct, but you are getting there, please try again ");
+      onOverlay();
+      button.innerHTML = "try again";
+      // 2. Append somewhere
+     
+      skipButton.appendChild(button);
+      // 3. Add event handler
+      button.addEventListener ("click", function() {
+        skipButton.removeChild(button);
+        updateScreen();
+        focusMethod();
+    
+      });
 
-    giveFeedback("The awnser is not correct, please try again");
-        }
+    }
 
+}
+
+
+
+//Function retrieved from componentswebsite: https://inclusive-components.design/tooltips-toggletips/
+(function() {
+  // Get all the toggletip buttons
+  var toggletips = document.querySelectorAll('[data-toggletip-content]');
+
+  // Iterate over them
+  Array.prototype.forEach.call(toggletips, function (toggletip) {
+    // Get the message from the data-content element
+    var message = toggletip.getAttribute('data-toggletip-content');
+
+    // Get the live region element
+    var liveRegion = toggletip.nextElementSibling;
+
+    // Toggle the message
+    toggletip.addEventListener('click', function () {
+        liveRegion.innerHTML = '';
+        window.setTimeout(function() {
+          liveRegion.innerHTML = '<span class="toggletip-bubble">'+ message +'</span>';
+        }, 100);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function (e) {
+      if (toggletip !== e.target) {
+        liveRegion.innerHTML = '';
+      }                        
+    });
+
+    // Remove toggletip on ESC
+    toggletip.addEventListener('keydown', function (e) {
+      if ((e.keyCode || e.which) === 27)
+      liveRegion.innerHTML = '';
+    });
+    
+    // Remove on blur
+    toggletip.addEventListener('blur', function (e) {
+      liveRegion.innerHTML = '';
+    });
+  });
+}());
+
+function playSound(){
+  let audio = new Audio(items[countItem].audio);
+    audio.play();
 }
 
 
@@ -208,6 +266,7 @@ function onOverlay() {
 
 function offOverlay() {
   document.getElementById("overlay").style.display = "none";
+  document.getElementById("button").disabled = false;
 }
 
 
@@ -252,6 +311,9 @@ function updateScreen() {
 
   // clear feedback
   giveFeedback("");
+  
+  //clear inputfield
+  inputValue.value="";
 
   //clear overlay
   offOverlay();
