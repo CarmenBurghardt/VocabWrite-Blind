@@ -60,10 +60,16 @@ a.skip-main:focus, a.skip-main:active {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
   }
+  .color-button{
+    color: #f8f9fa;
+    background-color: rgba(255,136,41,1);
+    border-color:rgba(255,136,41,1);
+    
+  }
+  .left{
 
-
-
-
+    float:left;
+  }
   .toggletip-container {
     position: relative;
     display: inline-block;

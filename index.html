@@ -77,7 +77,7 @@
 
 <!---button to listen to the audio--->
 <div class="row">
-  <button aria-label="audio for pronounciation,to listen without interuption the pronounciation turn off your screenreader and press the audio button" onclick="playSound()" class="image-button col-sm mt-5"><img src="audio.png"  alt="audio-button"></button>
+  <button id="newFocus" aria-label="audio for pronounciation in Spanish" onclick="playSound()" class="image-button col-sm mt-5"><img src="audio.png"  alt="audio-button"></button>
 </div>
 
 
@@ -106,26 +106,19 @@
 
 <div class="row ">
   <span class="col-sm mt-5   toggletip-container mr-4">
-    <button type="button" aria-label="button for getting tips about the awnser"  class="image-button" data-toggletip-content="Give me a tip" >
+    <button type="button"  id="hintButton" class="image-button" data-toggletip-content="Give me a tip" >
       <img src="help.png"  alt="help-button"></button>
     <span role="status"></span>
   </span>
 </div>
 
-<button id="button" class =" btn btn-secondary mt-5" onclick="compareAwnser()"> Submit </button>
+ 
+ <button id="button" class ="btn btn-secondary mt-5 " onclick="compareAwnser()"> Submit </button>
 
 
-
-
-
-
-
-
-
-<div id="overlay" >
-  <section id="alert" role="alert"> </section>
-  <div id= "skipButton"></div>
-  <div id = "tryAgainButton"></div>
+<div id="overlay">
+  
+  <span id="alert" role="alert" > </span><span id="tip" role="alert" > </span><span id = "tryAgainButton"></span><span id= "skipButton"></span>
   
 </div>
 
@@ -135,6 +128,11 @@
 <div class="feedback">sfsgs</div>
 
 </template>
+<!---- templates for notifications-->
+<template id="hint-tmpl"> 
+    <div class="hint">sfsgs</div>
+    
+  </template>
 
 </div>
 </main>

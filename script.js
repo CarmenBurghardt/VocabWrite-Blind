@@ -11,6 +11,7 @@ const submitButton = document.getElementById("submitButton");
 let lessonNumber=0;
 //id from progress bar
 let progress= document.getElementById("progress");
+let idItem =document.getElementById("item");
 // points for having good or wrong awnsers
 let score=0;
 // id for score in banner
@@ -27,6 +28,23 @@ if(countItem == 0){
 
 }
 
+// update prog
+function updateProgressbar(){
+  // calculate what exercise is in lesson
+  lessonNumber++;
+  // display progress
+  progress.innerHTML ="Progress" + lessonNumber ;
+}
+
+
+// everytime awnser is right, update score with 3
+function updateScore(){
+  // calculate score
+  score= score+3;
+
+  // dipaly score
+  idScore.innerHTML= "Score: " + score;
+}
 
 //Update the item dependend which item there is
 
@@ -58,149 +76,6 @@ function updateItem(countItem){
     updateProgressbar();
     countItem=0;
   }
-}
-
-
-
-
-
-
-
-// compares the awnser from the user with the correct one
-
-function compareAwnser(){
-  // correct awnser, from item.js
-  let correctAwnser = items[countItem].word;
-  // amount of mistakes in awnser
-  let mistake = 0;
-
-  // split the awnser and correct for comparing
-  let splittedWord= correctAwnser.split('');
-  let submitAwnser= inputValue.value.split('');
-
-  // which letters the user have been mistaken in
-  let mistakenLetters;
- 
-  //if letter is wrong where in the word is it written 
-  let positionWrongLetter;
-
-  //create new button for skipping,next
-  let button = document.createElement("button");
-  let buttonTryAgain = document.createElement("tryAgainButton");
-
-  // style button 
-  button.classList.add("btn");
-  button.classList.add("btn-secondary");
-  button.classList.add("mt-5");
- 
-  buttonTryAgain.classList.add("btn");
-  buttonTryAgain.classList.add("btn-secondary");
-  buttonTryAgain.classList.add("mt-5");
- 
-  // // compare for length, if length not the same awnser is wrong
-  if(correctAwnser.length !== submitAwnser.length){
-    
-    onOverlay();
-    button.innerHTML = "try again";
-    // 2. Append somewhere
-   
-    skipButton.appendChild(button);
-    // 3. Add event handler
-
-    giveFeedback("Not correct, but you are getting there, please try again ");
-    button.addEventListener ("click", function() {
-      skipButton.removeChild(button);
-      updateScreen();
-      focusMethod();
-  
-    });
-      
-    
-  }
-
-  
-// check for mistakes
-  for(let i=0; i< correctAwnser.length; i++ ){
-
-    // check if the letters are the same
-    if(correctAwnser[i]!== submitAwnser[i]){
-       mistake++;
-       mistakenLetters= submitAwnser[i];
-       positionWrongLetter=i;
-
-    } 
-   }  // if you make 1 mistake you have it almost correct
-    if (mistake ==1 ){
-      //positionWrongLetter++;
-      onOverlay();
-      giveFeedback("You were almost correct. Please improve your awnser or press skip");
-      console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
-      button.innerHTML = "skip";
-      buttonTryAgain.innerHTML="try again";
-      // 2. Append somewhere
-     
-      skipButton.appendChild(button);
-      tryAgainId.appendChild(buttonTryAgain);
-
-
-      // 3. Add event handler
-      button.addEventListener ("click", function() {
-        skipButton.removeChild(button);
-        updateScreen();
-        });
-
-      buttonTryAgain.addEventListener ("click", function() {
-        skipButton.removeChild(button);
-        tryAgainId.removeChild(buttonTryAgain);
-        offOverlay();
-        });
-      inputValue.addEventListener('keypress',function(e){
-        if(e.keyCode ==13){
-        e.preventDefault();
-         focusMethod();
-        skipButton.removeChild(button);
-
-        }
-      });
-     //
-    }
-    // if you make no mistakes
-     if(mistake ==0){
-       document.getElementById("inputvalue").disabled = true;
-      onOverlay();
-      giveFeedback("The awnser is correct,please press next");
-       button.innerHTML = "next";
-      // 2. Append somewhere
-     
-      skipButton.appendChild(button);
-      // 3. Add event handler
-      button.addEventListener ("click", function() {
-        skipButton.removeChild(button);
-        updateScreen();
-        focusMethod();
-    
-      });
-
-    }
-
-      // awnser is also wrong when more than 1 mistake is made
-    if(mistake >1){
-      giveFeedback("Not correct, but you are getting there, please try again ");
-      onOverlay();
-      button.innerHTML = "try again";
-      // 2. Append somewhere
-     
-      skipButton.appendChild(button);
-      // 3. Add event handler
-      button.addEventListener ("click", function() {
-        skipButton.removeChild(button);
-        updateScreen();
-        focusMethod();
-    
-      });
-
-    }
-
 }
 
 
@@ -253,10 +128,6 @@ function playSound(){
 
 
 
-focusMethod = function getFocus() {           
-  document.getElementById("item").focus();
-}
-
 
 
 function onOverlay() {
@@ -271,7 +142,7 @@ function offOverlay() {
 
 
 //TODO: scaffolding
-function updateHelpButtons(){}
+function tip(){}
 
 
 
@@ -302,6 +173,17 @@ function giveFeedback(message) {
   alert.appendChild(clone);
 }
 
+function giveTip(message) {
+
+  const btnTip = document.querySelector("#submitButton");
+  const tip = document.querySelector("#tip");
+  const tmplTip = document.querySelector("#hint-tmpl");
+
+  tip.innerHTML = '';// clear the feedback
+  const clone = tmplTip.content.cloneNode(true);
+  clone.querySelector('.hint').textContent = message;
+  tip.appendChild(clone);
+}
 
 // update the total screen
 
@@ -329,6 +211,182 @@ function updateScreen() {
     updateProgressbar();
   }
 }
+
+
+// compares the awnser from the user with the correct one
+
+
+//create new button for skipping,next
+let button = document.createElement("BUTTON");
+let buttonTryAgain = document.createElement("BUTTON");
+
+// style button 
+button.classList.add("btn");
+button.classList.add("btn-secondary");
+button.classList.add("mt-5");
+
+buttonTryAgain.classList.add("btn");
+buttonTryAgain.classList.add("btn-secondary");
+buttonTryAgain.classList.add("mt-5");
+ // which letters the user have been mistaken in
+ let mistakenLetters;
+
+ //if letter is wrong where in the word is it written 
+let positionWrongLetter;
+
+//array to keep track of what part of the word is correct
+let corrPartOfWord;
+
+function compareAwnser(){
+  // correct awnser, from item.js
+  let correctAwnser = items[countItem].word;
+  // amount of mistakes in awnser
+  let mistake = 0;
+
+  // split the awnser and correct for comparing
+  let splittedWord= correctAwnser.split('');
+  let submitAwnser= inputValue.value.split('');
+
+
+  
+// check for mistakes
+  for(let i=0; i< correctAwnser.length; i++ ){
+    // check if the letters are the same
+    if(correctAwnser[i]!== submitAwnser[i]){
+       mistake++;
+       mistakenLetters= submitAwnser[i];
+       positionWrongLetter=i;
+
+    }
+    
+    if(mistake==0){
+      corrPartOfWord +=  submitAwnser[i]+ ",";
+   
+    }
+   }  
+  
+   // if you make 1 mistake you have it almost correct
+    if (mistake ==1 ){
+      AwnserAlmostcorrect();
+      
+   
+    }
+    // if you make no mistakes
+     if(mistake ==0){
+      AwnserIsCorrect();
+    }
+
+      // awnser is also wrong when more than 1 mistake is made
+    if(mistake >1 || correctAwnser.length !== submitAwnser.length){
+      AwnserIsNotCorrect();
+
+    }
+}
+
+function giveAhint(){
+  const tipButton = getElementById("hintButton");
+  tipButton.setAttribute("data-toggletip-content", "Give me a tip");
+
+
+}
+
+
+
+function AwnserAlmostcorrect(){
+     //positionWrongLetter++;
+      onOverlay();
+      giveTip();
+      let corrPartWritten= corrPartOfWord;
+      giveFeedback("You were almost correct. Please improve your awnser or press skip." + " "
+      +"This part of the awnser was correct:  " + corrPartWritten+ ".");
+      console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
+      button.innerHTML = "skip";
+      buttonTryAgain.innerHTML="try again";
+      buttonTryAgain.id="almostTryAgain";
+      // 2. Append somewhere
+     
+      skipButton.appendChild(button);
+      tryAgainId.appendChild(buttonTryAgain);
+      button.classList.remove("mt-5");
+      buttonTryAgain.classList.remove("mt-5");
+ 
+      document.getElementById("almostTryAgain").focus();
+      // 3. Add event handler
+      button.addEventListener ("click", function() {
+        skipButton.removeChild(button);
+        offOverlay();
+        updateScreen();
+        document.getElementById("item").focus();
+        });
+
+      buttonTryAgain.addEventListener ("click", function() {
+        skipButton.removeChild(button);
+        tryAgainId.removeChild(buttonTryAgain);
+        offOverlay();
+        inputValue.focus();
+
+        });
+      // inputValue.addEventListener('keypress',function(e){
+      //   if(e.keyCode ==13){
+      //   e.preventDefault();
+      //   skipButton.removeChild(button);
+
+      //   }
+      // });
+
+
+}
+
+function AwnserIsNotCorrect(){
+
+
+  onOverlay();
+  giveFeedback("Not correct, but you are getting there, please try again ");
+  
+  button.innerHTML = "try again";
+  // 2. Append somewhere
+  button.id="tryAgain";
+  skipButton.appendChild(button);
+
+  // let newId= document.getElementById("tryAgainButton");
+
+  document.getElementById("tryAgain").focus();
+  console.log("after focus");
+  button.setAttribute('aria-label','Try again');
+      // 3. Add event handler
+  button.addEventListener ("click", function() {
+
+  
+  skipButton.removeChild(button);
+  offOverlay();
+  inputValue.focus(); 
+    
+      });
+}
+
+
+
+function AwnserIsCorrect(){
+  document.getElementById("inputvalue").disabled = true;
+  onOverlay();
+  giveFeedback("The awnser is correct,please press next");
+  button.innerHTML = "next";
+  // 2. Append somewhere
+   //add ID
+  button.id="nextButton";
+  skipButton.appendChild(button);
+  //receive focus
+  document.getElementById("nextButton").focus();
+
+  
+  button.addEventListener ("click", function() {
+  skipButton.removeChild(button);
+  updateScreen();
+  document.getElementById("item").focus();
+
+  });
+}
+
 
 
 
