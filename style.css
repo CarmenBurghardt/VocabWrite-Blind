@@ -1,30 +1,31 @@
 
-/* skip to main button, off screen*/
-a.skip-main {
-    left: -999px;
-    position:absolute;
-    top:auto;
-    width:1px;
-    height:1px;
-    overflow:hidden;
-    z-index:-999;
+html {
+  font-family: "Babbel milliard", Times, serif;
 }
-a.skip-main:focus, a.skip-main:active {
-    color: #fff;
-    background-color:#000;
-    left: auto;
-    top: auto;
-    width: 30%;
-    height: auto;
-    overflow:auto;
-    margin: 10px 35%;
-    padding:5px;
-    border-radius: 15px;
-    border:4px solid yellow;
-    text-align:center;
-    font-size:1.2em;
-    z-index:999;
+
+h1 {
+  font-style: medium;
+  font-size:18px;
 }
+
+#item {
+  font-family: 'Roboto', sans-serif;
+  font-style: bold;
+  font-size: 24px;
+
+}
+#instructionInput {
+  font-style: semibold;
+  font-size: 16px;
+  
+}
+
+#inputvalue {
+  font-style: book;
+  font-size: 24px;
+}
+
+/*skip links*/
 .skip-links{
   margin:0;
   padding:0;
@@ -82,6 +83,7 @@ a.skip-main:focus, a.skip-main:active {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
   }
+  /*styling of overlay*/
   .color-button{
     color: #f8f9fa;
     background-color: rgba(255,136,41,1);
@@ -92,22 +94,26 @@ a.skip-main:focus, a.skip-main:active {
 
     float:left;
   }
+
+    /* the bubble element, added inside the toggletip live region */
   .toggletip-container {
     position: relative;
     display: inline-block;
   }
   
-  /* the bubble element, added inside the toggletip live region */
+
   
   .toggletip-bubble {
+    font-style: Book;
+    font-size: 14px;
     display: inline-block;
     position: absolute;
     left: 100%;
     top: 0;
     width: 10em;
     padding: 0.5rem;
-    background: #000;
-    color: #fff;
+    background: #f8f6b4;
+    color: #000;
   }
   
   

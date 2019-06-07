@@ -9,6 +9,7 @@
   <meta name="author" content="SitePoint">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
  
 </head>
 
@@ -95,7 +96,7 @@
   
   <!--- instruction above inputfield--->
 
-    <p > Type the letter and press enter or the submit button</p>
+    <p id="instructionInput"> Type the letter and press enter or the submit button</p>
     <div class="input-group">
       <!----- article in front of inputfield---->
       <input autocomplete="off" type="text" class= "form-control" id="inputvalue"  placeholder="your awnser" aria-label= "your awnser" style="text-align: center">
@@ -107,13 +108,15 @@
 
 
 
-<!---button to listen to the audio--->
+<!---button toggling a hint--->
 
 <div class="row ">
   <span class="col-sm mt-5   toggletip-container mr-4">
-    <button type="button"  id="hintButton" class="image-button" data-toggletip-content="Give me a tip" >
+    
+    <button type="button"  id="hintButton" class="image-button"  >
       <img src="help.png"  alt="help-button"></button>
-    <span role="status"></span>
+    <span role="status">
+    </span>
   </span>
 </div>
 

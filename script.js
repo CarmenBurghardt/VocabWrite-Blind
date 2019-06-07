@@ -19,6 +19,8 @@ let idScore= document.getElementById("score");
 //Skip button 
 let skipButton = document.getElementById('skipButton');
 let tryAgainId= document.getElementById('tryAgainButton');
+const idHelpButton = document.getElementById("hintButton");
+
 
 
 // If nothing is loaded on the screen load the first tiem
@@ -59,7 +61,13 @@ function updateItem(countItem){
   // get next noun
   
   let nextItem= items[countItem].item;
-  
+  // prepare a hint
+  let hint= items[countItem].hint;
+ 
+  //hint= "'"+hint+"'";
+  // remove forme
+
+  idHelpButton.setAttribute('data-toggletip-content',  hint);
   // get next article
   let nextAritcle=  items[countItem].article;    
 
@@ -76,50 +84,51 @@ function updateItem(countItem){
     updateProgressbar();
     countItem=0;
   }
+  //Function retrieved from componentswebsite: https://inclusive-components.design/tooltips-toggletips/
+  (function() {
+    // Get all the toggletip buttons
+    var toggletips = document.querySelectorAll('[data-toggletip-content]');
+
+    // Iterate over them
+    Array.prototype.forEach.call(toggletips, function (toggletip) {
+      // Get the message from the data-content element
+      var message = toggletip.getAttribute('data-toggletip-content');
+
+      // Get the live region element
+      var liveRegion = toggletip.nextElementSibling;
+
+      // Toggle the message
+      toggletip.addEventListener('click', function () {
+          liveRegion.innerHTML = '';
+          window.setTimeout(function() {
+            liveRegion.innerHTML = '<span class="toggletip-bubble">'+ message +'</span>';
+          }, 100);
+      });
+
+      // Close on outside click
+      document.addEventListener('click', function (e) {
+        if (toggletip !== e.target) {
+          liveRegion.innerHTML = '';
+        }                        
+      });
+
+      // Remove toggletip on ESC
+      toggletip.addEventListener('keydown', function (e) {
+        if ((e.keyCode || e.which) === 27)
+        liveRegion.innerHTML = '';
+      });
+      
+      // Remove on blur
+      toggletip.addEventListener('blur', function (e) {
+        liveRegion.innerHTML = '';
+      });
+    });
+  }());
 }
 
 
 
-//Function retrieved from componentswebsite: https://inclusive-components.design/tooltips-toggletips/
-(function() {
-  // Get all the toggletip buttons
-  var toggletips = document.querySelectorAll('[data-toggletip-content]');
 
-  // Iterate over them
-  Array.prototype.forEach.call(toggletips, function (toggletip) {
-    // Get the message from the data-content element
-    var message = toggletip.getAttribute('data-toggletip-content');
-
-    // Get the live region element
-    var liveRegion = toggletip.nextElementSibling;
-
-    // Toggle the message
-    toggletip.addEventListener('click', function () {
-        liveRegion.innerHTML = '';
-        window.setTimeout(function() {
-          liveRegion.innerHTML = '<span class="toggletip-bubble">'+ message +'</span>';
-        }, 100);
-    });
-
-    // Close on outside click
-    document.addEventListener('click', function (e) {
-      if (toggletip !== e.target) {
-        liveRegion.innerHTML = '';
-      }                        
-    });
-
-    // Remove toggletip on ESC
-    toggletip.addEventListener('keydown', function (e) {
-      if ((e.keyCode || e.which) === 27)
-      liveRegion.innerHTML = '';
-    });
-    
-    // Remove on blur
-    toggletip.addEventListener('blur', function (e) {
-      liveRegion.innerHTML = '';
-    });
-  });
-}());
 
 function playSound(){
   let audio = new Audio(items[countItem].audio);
@@ -143,7 +152,15 @@ function offOverlay() {
 
 
 //TODO: scaffolding
-function tip(){}
+
+// idHelpButton.addEventListener('click',function(){
+//   console.log("inside within listerner");
+
+//   idHelpButton.setAttribute('data-toggletip-content', 'Give me a tip' );
+// });
+  
+
+
 
 
 
@@ -152,8 +169,8 @@ function tip(){}
 inputValue.addEventListener('keypress',function(e){
 
     // if enter is pressed
-   if(e.keyCode ==13){
-    // to avoid refreshing of page the whole time
+   if(e.keyCode ==13 && inputValue !== '' ){
+    // to avoid refreshing of page the w'hole time
     e.preventDefault();
     // check if input is correct
         compareAwnser();
@@ -186,6 +203,9 @@ function updateScreen() {
   
   //clear inputfield
   inputValue.value="";
+  //clear hint
+  idHelpButton.removeAttribute("data-toggletip-content");
+
 
   //clear overlay
   offOverlay();
@@ -254,7 +274,6 @@ function compareAwnser(){
       if(submitAwnser[i]==" "){
         corrPartOfWord +=  submitAwnser[i]+ " ";
       }
-   
     }
    }  
   
@@ -276,12 +295,7 @@ function compareAwnser(){
     }
 }
 
-function giveAhint(){
-  const tipButton = getElementById("hintButton");
-  tipButton.setAttribute("data-toggletip-content", "Give me a tip");
 
-
-}
 
 
 
@@ -413,8 +427,10 @@ function AwnserIsCorrect(){
 
   button.addEventListener ('keypress', function(e) {
     if(e.keyCode ==13){
-      skipButton.removeChild(button);
       updateScreen();
+       console.log("ï am in keypressed listener");
+      skipButton.removeChild(button);
+      
       document.getElementById("item").focus();
       }
 
