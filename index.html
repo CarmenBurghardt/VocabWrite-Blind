@@ -14,13 +14,18 @@
 
 <body>
 
+<lu class= "skip-links">
+  <li> <a href="#nav"> Skip to navigation</a></li>
+  <li><a href="#main"> Skip to main content</a></li>
+  <li><a href="#scoreAndProgress">Skip to score and progress panel </a></li>
+</lu>
 
-<!--- skip to main content, accessiblity-->
-<a class="skip-main" href="#main">Skip to main content</a>
+
+
 
 
 <!--- banner---> 
-<header>
+<header >
 
 <div class="navbar navbar-expand-lg navbar-light">
     <img src="Babbellogo.png" width="118.1" height="25.6" class="d-inline-block align-top mr-4" alt="Logo from Babbel">   
@@ -31,7 +36,7 @@
 
  <!--- navigation ---> 
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav justify-content-end" aria-label="score and progress panel">
+    <ul id="scoreAndProgress"class="navbar-nav justify-content-end" aria-label="score and progress panel">
         <li class= "navbar-text mr-4" >
             <span id="score" aria-live= "polite" > score: 0 </span> </li>
           <li class= "navbar-text mr-4">
@@ -39,7 +44,7 @@
            <span id="progress" aria-live= "polite"> progress: 0 </span> </li>
 
     </ul>
-    <nav>
+    <nav id="nav" >
     <ul class="navbar-nav justify-content-end">
     	 <!--- Scorepanel ---> 
       <li class="nav-item mr-4 ">

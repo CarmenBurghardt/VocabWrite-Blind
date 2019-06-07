@@ -127,17 +127,18 @@ function playSound(){
 }
 
 
-
-
-
 function onOverlay() {
+  
   document.getElementById("overlay").style.display = "block";
-   document.getElementById("button").disabled = true;
+  document.getElementById("inputvalue").disabled = true;
+  document.getElementById("button").disabled = true;
 }
 
 function offOverlay() {
   document.getElementById("overlay").style.display = "none";
+  document.getElementById("inputvalue").disabled = false;
   document.getElementById("button").disabled = false;
+  corrPartOfWord= "";
 }
 
 
@@ -173,17 +174,6 @@ function giveFeedback(message) {
   alert.appendChild(clone);
 }
 
-function giveTip(message) {
-
-  const btnTip = document.querySelector("#submitButton");
-  const tip = document.querySelector("#tip");
-  const tmplTip = document.querySelector("#hint-tmpl");
-
-  tip.innerHTML = '';// clear the feedback
-  const clone = tmplTip.content.cloneNode(true);
-  clone.querySelector('.hint').textContent = message;
-  tip.appendChild(clone);
-}
 
 // update the total screen
 
@@ -239,7 +229,7 @@ let corrPartOfWord;
 
 function compareAwnser(){
   // correct awnser, from item.js
-  let correctAwnser = items[countItem].word;
+  let correctAwnser = items[countItem].translation;
   // amount of mistakes in awnser
   let mistake = 0;
 
@@ -261,6 +251,9 @@ function compareAwnser(){
     
     if(mistake==0){
       corrPartOfWord +=  submitAwnser[i]+ ",";
+      if(submitAwnser[i]==" "){
+        corrPartOfWord +=  submitAwnser[i]+ " ";
+      }
    
     }
    }  
@@ -295,7 +288,6 @@ function giveAhint(){
 function AwnserAlmostcorrect(){
      //positionWrongLetter++;
       onOverlay();
-      giveTip();
       let corrPartWritten= corrPartOfWord;
       giveFeedback("You were almost correct. Please improve your awnser or press skip." + " "
       +"This part of the awnser was correct:  " + corrPartWritten+ ".");
@@ -315,6 +307,7 @@ function AwnserAlmostcorrect(){
       button.addEventListener ("click", function() {
         skipButton.removeChild(button);
         offOverlay();
+        console.log("I am within skip");
         updateScreen();
         document.getElementById("item").focus();
         });
@@ -326,13 +319,35 @@ function AwnserAlmostcorrect(){
         inputValue.focus();
 
         });
-      // inputValue.addEventListener('keypress',function(e){
-      //   if(e.keyCode ==13){
-      //   e.preventDefault();
-      //   skipButton.removeChild(button);
 
-      //   }
-      // });
+
+
+      
+        button.addEventListener ('keypress', function(e) {
+          // if enter is pressed
+            if(e.keyCode ==13){
+              // to avoid refreshing of page the whole time
+              e.preventDefault();
+              // check if input is correct
+              skipButton.removeChild(button);
+              offOverlay();
+              console.log("I am within skip");
+              updateScreen();
+              document.getElementById("item").focus();
+              }
+                    
+         
+          });
+  
+        buttonTryAgain.addEventListener ('keypress', function(e) {
+          if(e.keyCode ==13){
+            skipButton.removeChild(button);
+            tryAgainId.removeChild(buttonTryAgain);
+            offOverlay();
+            inputValue.focus();
+            }
+  
+          });
 
 
 }
@@ -355,13 +370,23 @@ function AwnserIsNotCorrect(){
   button.setAttribute('aria-label','Try again');
       // 3. Add event handler
   button.addEventListener ("click", function() {
+    skipButton.removeChild(button);
+    offOverlay();
+    inputValue.focus(); 
+    
+  });
+
+  button.addEventListener ('keypress', function(e) {
+    if(e.keyCode ==13){
+      skipButton.removeChild(button);
+      offOverlay();
+      inputValue.focus(); 
+      }
+
+    });
 
   
-  skipButton.removeChild(button);
-  offOverlay();
-  inputValue.focus(); 
-    
-      });
+
 }
 
 
@@ -385,6 +410,15 @@ function AwnserIsCorrect(){
   document.getElementById("item").focus();
 
   });
+
+  button.addEventListener ('keypress', function(e) {
+    if(e.keyCode ==13){
+      skipButton.removeChild(button);
+      updateScreen();
+      document.getElementById("item").focus();
+      }
+
+    });
 }
 
 
