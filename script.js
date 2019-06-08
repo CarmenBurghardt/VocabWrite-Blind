@@ -2,58 +2,58 @@
 //exercise to translate words
 //VARIABLES
 // counter trough items(words)
-let countItem =0;
+let countItem = 0;
 // id input from user in inputfield 
 let inputValue = document.getElementById("inputvalue");
 //id button to skip or to go to the next item 
 const submitButton = document.getElementById("submitButton");
 //lesson number for progress bar 
-let lessonNumber=0;
+let lessonNumber = 0;
 //id from progress bar
-let progress= document.getElementById("progress");
-let idItem =document.getElementById("item");
+let progress = document.getElementById("progress");
+let idItem = document.getElementById("item");
 // points for having good or wrong awnsers
-let score=0;
+let score = 0;
 // id for score in banner
-let idScore= document.getElementById("score");
+let idScore = document.getElementById("score");
 //Skip button 
 let skipButton = document.getElementById('skipButton');
-let tryAgainId= document.getElementById('tryAgainButton');
+let tryAgainId = document.getElementById('tryAgainButton');
 const idHelpButton = document.getElementById("hintButton");
-let missedArticle= false;
+let missedArticle = false;
 
 
 
 // If nothing is loaded on the screen load the first tiem
 
-if(countItem == 0){
+if (countItem == 0) {
   updateItem(0);
 
 }
 
 // update prog
-function updateProgressbar(){
+function updateProgressbar() {
   // calculate what exercise is in lesson
   lessonNumber++;
   // display progress
-  progress.innerHTML ="Progress" + lessonNumber ;
+  progress.innerHTML = "Progress" + lessonNumber;
 }
 
 
 // everytime awnser is right, update score with 3
-function updateScore(){
+function updateScore() {
   // calculate score
-  score= score+3;
+  score = score + 3;
 
   // dipaly score
-  idScore.innerHTML= "Score: " + score;
+  idScore.innerHTML = "Score: " + score;
 }
 
 //Update the item dependend which item there is
 
-function updateItem(countItem){
+function updateItem(countItem) {
   console.log(countItem);
-  
+
   //get id from article
   let articleId = document.getElementById('article');
 
@@ -61,33 +61,33 @@ function updateItem(countItem){
   let itemId = document.getElementById('item');
 
   // get next noun
-  
-  let nextItem= items[countItem].item;
+
+  let nextItem = items[countItem].item;
   // prepare a hint
-  let hint= items[countItem].hint;
- 
+  let hint = items[countItem].hint;
+
   //hint= "'"+hint+"'";
   // remove forme
 
-  idHelpButton.setAttribute('data-toggletip-content',  hint);
+  idHelpButton.setAttribute('data-toggletip-content', hint);
   // get next article
-  let nextAritcle=  items[countItem].article;    
+  let nextAritcle = items[countItem].article;
 
   //display item 
-  itemId .innerHTML= nextItem ;
+  itemId.innerHTML = nextItem;
 
 
-   // clear screen in inputfield
+  // clear screen in inputfield
   inputValue.value = '';
-      
+
   //when all items are done, give feedback the user is done
-  if(countItem == items.length){
+  if (countItem == items.length) {
     giveFeedback("you are done");
     updateProgressbar();
-    countItem=0;
+    countItem = 0;
   }
   //Function retrieved from componentswebsite: https://inclusive-components.design/tooltips-toggletips/
-  (function() {
+  (function () {
     // Get all the toggletip buttons
     var toggletips = document.querySelectorAll('[data-toggletip-content]');
 
@@ -101,25 +101,25 @@ function updateItem(countItem){
 
       // Toggle the message
       toggletip.addEventListener('click', function () {
-          liveRegion.innerHTML = '';
-          window.setTimeout(function() {
-            liveRegion.innerHTML = '<span class="toggletip-bubble">'+ message +'</span>';
-          }, 100);
+        liveRegion.innerHTML = '';
+        window.setTimeout(function () {
+          liveRegion.innerHTML = '<span class="toggletip-bubble">' + message + '</span>';
+        }, 100);
       });
 
       // Close on outside click
       document.addEventListener('click', function (e) {
         if (toggletip !== e.target) {
           liveRegion.innerHTML = '';
-        }                        
+        }
       });
 
       // Remove toggletip on ESC
       toggletip.addEventListener('keydown', function (e) {
         if ((e.keyCode || e.which) === 27)
-        liveRegion.innerHTML = '';
+          liveRegion.innerHTML = '';
       });
-      
+
       // Remove on blur
       toggletip.addEventListener('blur', function (e) {
         liveRegion.innerHTML = '';
@@ -132,14 +132,14 @@ function updateItem(countItem){
 
 
 
-function playSound(){
+function playSound() {
   let audio = new Audio(items[countItem].audio);
-    audio.play();
+  audio.play();
 }
 
 
 function onOverlay() {
-  
+
   document.getElementById("overlay").style.display = "block";
   document.getElementById("inputvalue").disabled = true;
   document.getElementById("button").disabled = true;
@@ -149,7 +149,9 @@ function offOverlay() {
   document.getElementById("overlay").style.display = "none";
   document.getElementById("inputvalue").disabled = false;
   document.getElementById("button").disabled = false;
-  corrPartOfWord= "";
+  corrPartOfWord = "";
+  showButton(button,"button to go to the next word");
+  showButton(buttonTryAgain,"button for make another attempt");
 }
 
 
@@ -160,7 +162,7 @@ function offOverlay() {
 
 //   idHelpButton.setAttribute('data-toggletip-content', 'Give me a tip' );
 // });
-  
+
 
 
 
@@ -168,15 +170,15 @@ function offOverlay() {
 
 //Event listener for if user submit awnser 
 
-inputValue.addEventListener('keypress',function(e){
+inputValue.addEventListener('keypress', function (e) {
 
-    // if enter is pressed
-   if(e.keyCode ==13 && inputValue !== '' && inputValue !== " " ){
+  // if enter is pressed
+  if (e.keyCode == 13 && inputValue !== '' && inputValue !== " ") {
     // to avoid refreshing of page the w'hole time
     e.preventDefault();
     // check if input is correct
-        compareAwnser();
-    }
+    compareAwnser();
+  }
 });
 
 // feedback if awnser is wrong or right 
@@ -202,9 +204,9 @@ function updateScreen() {
 
   // clear feedback
   giveFeedback("");
-  
+
   //clear inputfield
-  inputValue.value="";
+  inputValue.value = "";
   //clear hint
   idHelpButton.removeAttribute("data-toggletip-content");
 
@@ -213,7 +215,7 @@ function updateScreen() {
   offOverlay();
   // update next item 
   countItem++;
- 
+
   //load next item and update score
   updateItem(countItem);
   updateScore();
@@ -232,244 +234,168 @@ function updateScreen() {
 let button = document.createElement("BUTTON");
 let buttonTryAgain = document.createElement("BUTTON");
 
+// add event handler
+button.addEventListener("click", function () {
+  offOverlay();
+  console.log("I am within skip");
+  updateScreen();
+  document.getElementById("item").focus();
+});
+
+button.addEventListener('keypress', function (e) {
+  // if enter is pressed
+  if (e.keyCode == 13) {
+    // to avoid refreshing of page the whole time
+    e.preventDefault();
+    // check if input is correct
+    // skipButton.removeChild(button);
+    offOverlay();
+    console.log("I am within skip");
+    updateScreen();
+    document.getElementById("item").focus();
+  }
+});
+
+buttonTryAgain.addEventListener("click", function () {
+  offOverlay();
+  inputValue.focus();
+});
+
+buttonTryAgain.addEventListener('keypress', function (e) {
+  if (e.keyCode == 13) {
+    offOverlay();
+    inputValue.focus();
+  }
+});
+
 // style button 
 button.classList.add("btn");
 button.classList.add("btn-primary");
 
 buttonTryAgain.classList.add("btn");
 buttonTryAgain.classList.add("btn-secondary");
- // which letters the user have been mistaken in
- let mistakenLetters;
+// which letters the user have been mistaken in
+let mistakenLetters;
 
- //if letter is wrong where in the word is it written 
+//if letter is wrong where in the word is it written 
 let positionWrongLetter;
 
 //array to keep track of what part of the word is correct
 let corrPartOfWord;
+skipButton.appendChild(button);
+tryAgainId.appendChild(buttonTryAgain);
 
-function compareAwnser(){
+function compareAwnser() {
   // correct awnser, from item.js
   let correctAwnser = items[countItem].translation;
   // amount of mistakes in awnser
   let mistake = 0;
 
   // split the awnser and correct for comparing
-  let splittedWord= correctAwnser.split('');
-  let submitAwnser= inputValue.value.split('');
+  let splittedWord = correctAwnser.split('');
+  let submitAwnser = inputValue.value.split('');
 
 
-  
-// check for mistakes
-  for(let i=0; i< correctAwnser.length; i++ ){
+
+  // check for mistakes
+  for (let i = 0; i < correctAwnser.length; i++) {
     // check if the letters are the same
-    if(correctAwnser[i]!== submitAwnser[i]){
-       mistake++;
-       mistakenLetters= submitAwnser[i];
-       positionWrongLetter=i;
+    if (correctAwnser[i] !== submitAwnser[i]) {
+      mistake++;
+      mistakenLetters = submitAwnser[i];
+      positionWrongLetter = i;
 
     }
-    
-    if(mistake==0){
-      corrPartOfWord +=  submitAwnser[i]+ ",";
-      if(submitAwnser[i]==" "){
-        corrPartOfWord +=  submitAwnser[i]+ " ";
+
+    if (mistake == 0) {
+      corrPartOfWord += submitAwnser[i] + ",";
+      if (submitAwnser[i] == " ") {
+        corrPartOfWord += submitAwnser[i] + " ";
       }
     }
-   }  
-   
-  
-   // if you make 1 mistake you have it almost correct
-    if (mistake ==1 ){
+  }
+
+
+  // if you make 1 mistake you have it almost correct
+  if (mistake == 1) {
+    AwnserAlmostcorrect();
+
+
+  }
+  // if you make no mistakes
+  if (mistake == 0) {
+    AwnserIsCorrect();
+  }
+
+  // awnser is also wrong when more than 1 mistake is made
+  if (mistake > 1 || correctAwnser.length !== submitAwnser.length) {
+    if (inputValue.value == items[countItem].word) {
+      missedArticle = true;
       AwnserAlmostcorrect();
-      
-   
-    }
-    // if you make no mistakes
-     if(mistake ==0){
-      AwnserIsCorrect();
-    }
-
-      // awnser is also wrong when more than 1 mistake is made
-    if(mistake >1 || correctAwnser.length !== submitAwnser.length){
-      if( inputValue.value == items[countItem].word){
-        missedArticle= true;
-        AwnserAlmostcorrect();
-        // console.log("missed article");
-        return;
-
-       }
-      AwnserIsNotCorrect();
       return;
 
     }
-}
+    AwnserIsNotCorrect();
+    return;
 
-
-
-
-
-function AwnserAlmostcorrect(){
-     //positionWrongLetter++;
-      onOverlay();
-      let corrPartWritten= corrPartOfWord;
-      if(missedArticle){
-        // console.log("within almost correct missing article");
-        giveFeedback("You miss the article in front of the word");
-        missedArticle= false;
-      }
-     else{
-      
-      giveFeedback("You were almost correct. Please improve your awnser or press skip." + " "
-      +"This part of the awnser was correct:  " + corrPartWritten+ ".");
-      // console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
-    }
-      
-      
-      button.innerHTML = "skip";
-      buttonTryAgain.innerHTML="try again";
-      buttonTryAgain.id=newFunction()
-      ;
-      // 2. Append somewhere
-     
-      skipButton.appendChild(button);
-      tryAgainId.appendChild(buttonTryAgain);
- 
-      document.getElementById("almostTryAgain").focus();
-      // 3. Add event handler
-      button.addEventListener ("click", function() {
-        // skipButton.removeChild(button);
-        offOverlay();
-        console.log("I am within skip");
-        updateScreen();
-        document.getElementById("item").focus();
-        });
-
-      buttonTryAgain.addEventListener ("click", function() {
-        // skipButton.removeChild(button);
-        // tryAgainId.removeChild(buttonTryAgain);
-        offOverlay();
-        inputValue.focus();
-
-        });
-
-
-
-      
-        button.addEventListener ('keypress', function(e) {
-          // if enter is pressed
-            if(e.keyCode ==13){
-              // to avoid refreshing of page the whole time
-              e.preventDefault();
-              // check if input is correct
-              // skipButton.removeChild(button);
-              offOverlay();
-              console.log("I am within skip");
-              updateScreen();
-              document.getElementById("item").focus();
-              }
-                    
-         
-          });
-  
-        buttonTryAgain.addEventListener ('keypress', function(e) {
-          if(e.keyCode ==13){
-            // skipButton.removeChild(button);
-            // tryAgainId.removeChild(buttonTryAgain);
-            offOverlay();
-            inputValue.focus();
-            }
-  
-          });
-
-
-
-  function newFunction() {
-    return "almostTryAgain";
   }
 }
 
-function AwnserIsNotCorrect(){
+
+function AwnserAlmostcorrect() {
+  onOverlay();
+  let corrPartWritten = corrPartOfWord;
+  if (missedArticle) {
+    giveFeedback("You miss the article in front of the word");
+    missedArticle = false;
+  }
+  else {
+    giveFeedback("You were almost correct. Please improve your awnser or press skip." + " "
+      + "This part of the awnser was correct:  " + corrPartWritten + ".");
+  }
+  button.innerHTML = "skip";
+  buttonTryAgain.innerHTML = "try again";
+  buttonTryAgain.focus();
+}
+
+function AwnserIsNotCorrect() {
+  hideButton(button);
   onOverlay();
   giveFeedback("Not correct, but you are getting there, please try again ");
-  
-  button.innerHTML = "try again";
-  // 2. Append somewhere
-  button.id="tryAgain";
-  skipButton.appendChild(button);
-
-  // let newId= document.getElementById("tryAgainButton");
-
-  document.getElementById("tryAgain").focus();
-  button.setAttribute('aria-label','Try again');
-      // 3. Add event handler
-  button.addEventListener ("click", function() {
-    // skipButton.removeChild(button);
-    offOverlay();
-    inputValue.focus(); 
-    
-  });
-
-  button.addEventListener ('keypress', function(e) {
-    if(e.keyCode ==13){
-      // skipButton.removeChild(button);
-      offOverlay();
-      inputValue.focus(); 
-      }
-
-    });
-
-  
-
+  buttonTryAgain.innerHTML = "try again";
+  buttonTryAgain.focus();
+  buttonTryAgain.setAttribute('aria-label', 'Try again');
 }
 
 
 
-function AwnserIsCorrect(){
+function AwnserIsCorrect() {
   document.getElementById("inputvalue").disabled = true;
+  hideButton(buttonTryAgain);
   onOverlay();
   giveFeedback("The awnser is correct,please press next");
   button.innerHTML = "next";
-  // 2. Append somewhere
-   //add ID
-  button.id="nextButton";
-  skipButton.appendChild(button);
-  //receive focus
-  document.getElementById("nextButton").focus();
-
-  
-  button.addEventListener ('click', () =>  {
-    console.log("I am in click");
-    
-  updateScreen();
-  document.getElementById("item").focus();
-
-  });
-
-  button.addEventListener ('keypress', function(e) {
-    if(e.keyCode === 13){
-      e.preventDefault();
-      updateScreen();
-      console.log("i am in correct igtnft enterkey");
-      //  console.log("ï am in keypressed listener");
-      //skipButton.removeChild(button);
-      
-      document.getElementById("item").focus();
-      }
-
-    });
+  button.focus();
 }
 
 
+function hideButton(button){
+  button.style.visibility = "hidden";
+  button.setAttribute('aria-hidden','true');
+  button.removeAttribute('aria-label');
+}
 
-
-
-
+function showButton(button, description){
+  button.style.visibility = "visible";
+  button.setAttribute('aria-hidden','false');
+  button.setAttribute('aria-label', description);
+}
 //Save awnsers, for feedback/review
 let newAwnser = [];
 
-function saveAwnsers(){
+function saveAwnsers() {
   let value = document.getElementById('inputvalue').value;
   newAwnser.push(value);
   console.log(newAwnser);
-} 
+}
 
