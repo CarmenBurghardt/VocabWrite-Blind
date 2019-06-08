@@ -20,6 +20,7 @@ let idScore= document.getElementById("score");
 let skipButton = document.getElementById('skipButton');
 let tryAgainId= document.getElementById('tryAgainButton');
 const idHelpButton = document.getElementById("hintButton");
+let missedArticle= false;
 
 
 
@@ -51,6 +52,7 @@ function updateScore(){
 //Update the item dependend which item there is
 
 function updateItem(countItem){
+  console.log(countItem);
   
   //get id from article
   let articleId = document.getElementById('article');
@@ -169,7 +171,7 @@ function offOverlay() {
 inputValue.addEventListener('keypress',function(e){
 
     // if enter is pressed
-   if(e.keyCode ==13 && inputValue !== '' ){
+   if(e.keyCode ==13 && inputValue !== '' && inputValue !== " " ){
     // to avoid refreshing of page the w'hole time
     e.preventDefault();
     // check if input is correct
@@ -232,12 +234,10 @@ let buttonTryAgain = document.createElement("BUTTON");
 
 // style button 
 button.classList.add("btn");
-button.classList.add("btn-secondary");
-button.classList.add("mt-5");
+button.classList.add("btn-primary");
 
 buttonTryAgain.classList.add("btn");
 buttonTryAgain.classList.add("btn-secondary");
-buttonTryAgain.classList.add("mt-5");
  // which letters the user have been mistaken in
  let mistakenLetters;
 
@@ -276,6 +276,7 @@ function compareAwnser(){
       }
     }
    }  
+   
   
    // if you make 1 mistake you have it almost correct
     if (mistake ==1 ){
@@ -290,7 +291,15 @@ function compareAwnser(){
 
       // awnser is also wrong when more than 1 mistake is made
     if(mistake >1 || correctAwnser.length !== submitAwnser.length){
+      if( inputValue.value == items[countItem].word){
+        missedArticle= true;
+        AwnserAlmostcorrect();
+        // console.log("missed article");
+        return;
+
+       }
       AwnserIsNotCorrect();
+      return;
 
     }
 }
@@ -303,23 +312,32 @@ function AwnserAlmostcorrect(){
      //positionWrongLetter++;
       onOverlay();
       let corrPartWritten= corrPartOfWord;
+      if(missedArticle){
+        // console.log("within almost correct missing article");
+        giveFeedback("You miss the article in front of the word");
+        missedArticle= false;
+      }
+     else{
+      
       giveFeedback("You were almost correct. Please improve your awnser or press skip." + " "
       +"This part of the awnser was correct:  " + corrPartWritten+ ".");
-      console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
+      // console.log("look at the letter: "+ mistakenLetters+" "+"that is letter "+ " "+ positionWrongLetter+" "+"in your awnser");
+    }
+      
+      
       button.innerHTML = "skip";
       buttonTryAgain.innerHTML="try again";
-      buttonTryAgain.id="almostTryAgain";
+      buttonTryAgain.id=newFunction()
+      ;
       // 2. Append somewhere
      
       skipButton.appendChild(button);
       tryAgainId.appendChild(buttonTryAgain);
-      button.classList.remove("mt-5");
-      buttonTryAgain.classList.remove("mt-5");
  
       document.getElementById("almostTryAgain").focus();
       // 3. Add event handler
       button.addEventListener ("click", function() {
-        skipButton.removeChild(button);
+        // skipButton.removeChild(button);
         offOverlay();
         console.log("I am within skip");
         updateScreen();
@@ -327,8 +345,8 @@ function AwnserAlmostcorrect(){
         });
 
       buttonTryAgain.addEventListener ("click", function() {
-        skipButton.removeChild(button);
-        tryAgainId.removeChild(buttonTryAgain);
+        // skipButton.removeChild(button);
+        // tryAgainId.removeChild(buttonTryAgain);
         offOverlay();
         inputValue.focus();
 
@@ -343,7 +361,7 @@ function AwnserAlmostcorrect(){
               // to avoid refreshing of page the whole time
               e.preventDefault();
               // check if input is correct
-              skipButton.removeChild(button);
+              // skipButton.removeChild(button);
               offOverlay();
               console.log("I am within skip");
               updateScreen();
@@ -355,8 +373,8 @@ function AwnserAlmostcorrect(){
   
         buttonTryAgain.addEventListener ('keypress', function(e) {
           if(e.keyCode ==13){
-            skipButton.removeChild(button);
-            tryAgainId.removeChild(buttonTryAgain);
+            // skipButton.removeChild(button);
+            // tryAgainId.removeChild(buttonTryAgain);
             offOverlay();
             inputValue.focus();
             }
@@ -364,11 +382,13 @@ function AwnserAlmostcorrect(){
           });
 
 
+
+  function newFunction() {
+    return "almostTryAgain";
+  }
 }
 
 function AwnserIsNotCorrect(){
-
-
   onOverlay();
   giveFeedback("Not correct, but you are getting there, please try again ");
   
@@ -380,11 +400,10 @@ function AwnserIsNotCorrect(){
   // let newId= document.getElementById("tryAgainButton");
 
   document.getElementById("tryAgain").focus();
-  console.log("after focus");
   button.setAttribute('aria-label','Try again');
       // 3. Add event handler
   button.addEventListener ("click", function() {
-    skipButton.removeChild(button);
+    // skipButton.removeChild(button);
     offOverlay();
     inputValue.focus(); 
     
@@ -392,7 +411,7 @@ function AwnserIsNotCorrect(){
 
   button.addEventListener ('keypress', function(e) {
     if(e.keyCode ==13){
-      skipButton.removeChild(button);
+      // skipButton.removeChild(button);
       offOverlay();
       inputValue.focus(); 
       }
@@ -418,18 +437,21 @@ function AwnserIsCorrect(){
   document.getElementById("nextButton").focus();
 
   
-  button.addEventListener ("click", function() {
-  skipButton.removeChild(button);
+  button.addEventListener ('click', () =>  {
+    console.log("I am in click");
+    
   updateScreen();
   document.getElementById("item").focus();
 
   });
 
   button.addEventListener ('keypress', function(e) {
-    if(e.keyCode ==13){
+    if(e.keyCode === 13){
+      e.preventDefault();
       updateScreen();
-       console.log("ï am in keypressed listener");
-      skipButton.removeChild(button);
+      console.log("i am in correct igtnft enterkey");
+      //  console.log("ï am in keypressed listener");
+      //skipButton.removeChild(button);
       
       document.getElementById("item").focus();
       }

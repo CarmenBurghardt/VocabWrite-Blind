@@ -1,168 +1,168 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
 
   <title>Babbel Vocabulary Write Trainer</title>
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
- 
+
 </head>
 
 <body>
 
-<lu class= "skip-links">
-  <li> <a href="#nav"> Skip to navigation</a></li>
-  <li><a href="#main"> Skip to main content</a></li>
-  <li><a href="#scoreAndProgress">Skip to score and progress panel </a></li>
-</lu>
+  <ul class="skip-links">
+    <li> <a href="#nav"> Skip to navigation</a></li>
+    <li><a href="#main"> Skip to main content</a></li>
+    <li><a href="#scoreAndProgress">Skip to score and progress panel </a></li>
+  </ul>
 
+  <!--- banner--->
+  <header>
 
+    <div class="navbar navbar-expand-lg navbar-light">
+      <img src="Babbellogo.png" width="118.1" height="25.6" class="d-inline-block align-top mr-4"
+        alt="Logo from Babbel">
+      <!--- hamburger menu for smaller screen--->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <!--- navigation --->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul id="scoreAndProgress" class="navbar-nav justify-content-end" aria-label="score and progress panel">
+          <li class="navbar-text mr-4">
+            <span id="score" aria-live="polite"> score: 0 </span> </li>
+          <li class="navbar-text mr-4">
 
+            <span id="progress" aria-live="polite"> progress: 0 </span> </li>
 
-<!--- banner---> 
-<header >
-
-<div class="navbar navbar-expand-lg navbar-light">
-    <img src="Babbellogo.png" width="118.1" height="25.6" class="d-inline-block align-top mr-4" alt="Logo from Babbel">   
-  <!--- hamburger menu for smaller screen---> 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
- <!--- navigation ---> 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul id="scoreAndProgress"class="navbar-nav justify-content-end" aria-label="score and progress panel">
-        <li class= "navbar-text mr-4" >
-            <span id="score" aria-live= "polite" > score: 0 </span> </li>
-          <li class= "navbar-text mr-4">
-            
-           <span id="progress" aria-live= "polite"> progress: 0 </span> </li>
-
-    </ul>
-    <nav id="nav" >
-    <ul class="navbar-nav justify-content-end">
-    	 <!--- Scorepanel ---> 
-      <li class="nav-item mr-4 ">
-         <a class="nav-link " href="#">About</a>
-      </li>
-      <li class="nav-item mr-4 ">
-          <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-  </nav>
-  </div>
-</div>
-
-</header>
-
-
-<!----main --->
-<main id="main" tabindex="-1">
-
-
-
-<div class= "container text-center pt-4">
-
-  <!---- instruction---->
-<div class="row">
-   <h1 class="col-sm lead "> What is the right way of spelling the following word in Spanish? </h1>
-  
-</div>
-<!---item to translate--->
-<div class="row">
-  <div class="col-sm mt-5 "><b><span id = "item" aria-live= "assertive" tabindex="0" ></span></b></div>
-</div>
-
-
-
-<!---button to listen to the audio--->
-<div class="row">
-  <button id="newFocus" aria-label="audio for pronounciation in Spanish" onclick="playSound()" class="image-button col-sm mt-5"><img src="audio.png"  alt="audio-button"></button>
-</div>
-
-
-
-
-<!----inputfield -->
- 
-<div class="row">
-  <div class= "col-lg-6 mx-auto mt-5 ">
-  
-  <!--- instruction above inputfield--->
-
-    <p id="instructionInput"> Type the letter and press enter or the submit button</p>
-    <div class="input-group">
-      <!----- article in front of inputfield---->
-      <input autocomplete="off" type="text" class= "form-control" id="inputvalue"  placeholder="your awnser" aria-label= "your awnser" style="text-align: center">
-    
+        </ul>
+        <nav id="nav">
+          <ul class="navbar-nav justify-content-end">
+            <!--- Scorepanel --->
+            <li class="nav-item mr-4 ">
+              <a class="nav-link " href="#">About</a>
+            </li>
+            <li class="nav-item mr-4 ">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
-</div>
+
+  </header>
+
+
+  <!----main --->
+  <main id="main" tabindex="-1">
+
+    <div class="container text-center pt-4">
+
+      <!---- instruction---->
+      <div class="row">
+        <h1 class="col-sm lead "> What is the right way of spelling the following word in Spanish? </h1>
+      </div>
+
+      <!---item to translate--->
+      <div class="row">
+        <div class="col-sm mt-5 "><b><span id="item" aria-live="assertive" tabindex="0"></span></b></div>
+      </div>
+
+
+
+      <!---button to listen to the audio--->
+      <div class="row">
+        <button id="newFocus" aria-label="audio for pronounciation in Spanish" onclick="playSound()"
+          class="image-button col-sm mt-5"><img src="audio.png" alt="audio-button"></button>
+      </div>
+
+      <!----inputfield -->
+
+      <div class="row">
+        <div class="col-lg-6 mx-auto mt-5 ">
+
+          <!--- instruction above inputfield--->
+
+          <p id="instructionInput"> Type the letter and press enter or the submit button</p>
+          <div class="input-group">
+            <!----- article in front of inputfield---->
+            <input autocomplete="off" type="text" class="form-control" id="inputvalue" placeholder="your awnser"
+              aria-label="your awnser" style="text-align: center">
+
+          </div>
+        </div>
+      </div>
+
+      <!---button toggling a hint--->
+
+      <div class="row">
+        <div class=" toggletip-container">
+          <button type="button" id="hintButton" class="image-button">
+            <img src="help.png" alt="help-button"></button>
+          <div role="status"></div>
+        </div>
+      </div>
+
+      <div class="row row-submit">
+        <button id="button" class="btn btn-primary mt-5 " onclick="compareAwnser()"> Submit </button>
+      </div>
+
+      <div id="overlay" class="feedback-sheet">
+        <div class="feedback-sheet-wrapper">
+          <div class="feedback-sheet-text">
+            <div id="alert" role="alert"></div>
+            <div id="tip" role="alert"></div>
+          </div>
+          <div class="feedback-sheet-buttons">
+            <div id="tryAgainButton"></div>
+            <div id="skipButton"></div>
+          </div>
+        </div>
+      </div>
+
+      <!---- templates for notifications-->
+      <template id="feedback-tmpl">
+        <div class="feedback">sfsgs</div>
+      </template>
+
+      <!---- templates for notifications-->
+      <template id="hint-tmpl">
+        <div class="hint">sfsgs</div>
+      </template>
+    </div>
+  </main>
+
+
+  <!-- Bootstrap: jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
 
 
 
 
-<!---button toggling a hint--->
+  <!----script--->
 
-<div class="row ">
-  <span class="col-sm mt-5   toggletip-container mr-4">
-    
-    <button type="button"  id="hintButton" class="image-button"  >
-      <img src="help.png"  alt="help-button"></button>
-    <span role="status">
-    </span>
-  </span>
-</div>
-
- 
- <button id="button" class ="btn btn-secondary mt-5 " onclick="compareAwnser()"> Submit </button>
-
-
-<div id="overlay">
-  
-  <span id="alert" role="alert" > </span><span id="tip" role="alert" > </span><span id = "tryAgainButton"></span><span id= "skipButton"></span>
-  
-</div>
-
-
-<!---- templates for notifications-->
-<template id="feedback-tmpl"> 
-<div class="feedback">sfsgs</div>
-
-</template>
-<!---- templates for notifications-->
-<template id="hint-tmpl"> 
-    <div class="hint">sfsgs</div>
-    
-  </template>
-
-</div>
-</main>
-
-
-
-
-
-<!-- Bootstrap: jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
-
-
-
-<!----script--->
-
-<script type="text/javascript" src="items.js"></script>
-<script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="items.js"></script>
+  <script type="text/javascript" src="script.js"></script>
 
 
 
 </body>
+
 </html>

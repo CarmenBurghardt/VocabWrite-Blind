@@ -51,70 +51,94 @@ h1 {
 
 /**@resets button border */ 
 .image-button{
-    padding: 0;
-    border: none;
-    background: none;
+	padding: 0;
+	border: none;
+	background: none;
 }  
 
+/*styling of overlay*/
+.btn-primary {
+	color: #f8f9fa;
+	background-color: rgba(255,136,41,1);
+	border-color:rgba(255,136,41,1);
+}
 
-#overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 20%;
-    top: 100;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255,255,255,0.8);
-    border-style: outset;
-    border-top-color: rgba(190,206,221,0.4);
-   
-    z-index: 2;
-    cursor: pointer;
-  }
-  
-  #text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 50px;
-    color: white;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-  }
-  /*styling of overlay*/
-  .color-button{
-    color: #f8f9fa;
-    background-color: rgba(255,136,41,1);
-    border-color:rgba(255,136,41,1);
-    
-  }
-  .left{
+.btn-primary:hover {
+	background-color: rgb(236, 124, 31);
+	border-color:rgb(236, 124, 31);
+}
 
-    float:left;
-  }
+.btn-primary:disabled {
+	background-color: gray;
+	border-color:gray;
+	cursor: not-allowed;
+}
 
-    /* the bubble element, added inside the toggletip live region */
-  .toggletip-container {
-    position: relative;
-    display: inline-block;
-  }
-  
+.left{
+	float:left;
+}
 
+/* the bubble element, added inside the toggletip live region */
+
+.toggletip-container {
+	position: relative;
+	margin: 20px auto;
+}
   
-  .toggletip-bubble {
-    font-style: Book;
-    font-size: 14px;
-    display: inline-block;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    width: 10em;
-    padding: 0.5rem;
-    background: #f8f6b4;
-    color: #000;
-  }
-  
-  
- 
+.toggletip-bubble {
+	font-size: 14px;
+	position: absolute;
+	left: -20%;
+	top: 30px;
+	width: 10em;
+	padding: 0.5rem;
+	background: #f8f6b4;
+	color: #000;
+}
+
+.row-submit {
+	margin: 40px auto;
+	justify-content: center;
+}
+
+
+
+
+.feedback-sheet {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 150px;
+	top: auto;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255,255,255,0.8);
+	border-style: outset;
+	border-top-color: rgba(190,206,221,0.4);
+	z-index: 2;
+	cursor: pointer;
+	padding: 20px;
+}
+
+.feedback-sheet-wrapper {
+	display: flex;
+	height: 100%;
+	align-items: center;
+}
+
+.feedback-sheet-text {
+	width: 60%;
+}
+.feedback-sheet-buttons {
+	width: 40%;
+}
+
+.feedback-sheet-buttons > div {
+	display: inline-flex;
+	margin-right: 20px;
+}
+
+.feedback-sheet-text {
+	text-align: left !important;
+}
