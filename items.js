@@ -9,39 +9,40 @@
 //Adding some longer words
 
 const items = [
-    {
-       item: 'the fruit',
-        article:'la',
-        word: 'fruta',
-        translation: 'la fruta',
-        hint:'The word contains the following letters  T-R-U-F-A',
-        audio: 'fruta.mp3'
-    },
-    { 
-        item: 'the banana',
-        article:'el',
-        word: 'plátano',
-        translation: 'el plátano',
-        hint:'The translation contains the following letters O-P-L-Á-N-T-A-N ',
-        audio: 'platano.mp3'
-    },
+  {
+    item: 'the fruit',
+    article: 'la',
+    word: 'fruta',
+    translation: 'la fruta',
+    hint: 'The word contains the following letters  T-R-U-F-A',
+    audio: 'fruta.mp3'
+  },
+  {
+    item: 'the banana',
+    article: 'el',
+    word: 'plátano',
+    translation: 'el plátano',
+    hint: 'The translation contains the following letters O-P-L-Á-N-T-A-N ',
+    audio: 'platano.mp3'
+  },
 
 
-    { 
-        item: 'the apple' ,
-        article:'la',
-        word: 'manzana',
-        translation: 'la manzana',
-        hint:'The translation contains the following letters N-A-Z-M-A-N-A',
-        audio: 'manzana.mp3'
+  {
+    item: 'the apple',
+    article: 'la',
+    word: 'manzana',
+    translation: 'la manzana',
+    hint: 'The translation contains the following letters N-A-Z-M-A-N-A',
+    audio: 'manzana.mp3'
 
-    },
-    { item: 'the carrot',
-        article:'la',
-        word: 'zanahoria',
-        translation: 'la zanahoria',
-        hint:'The translation contains the following letters N-A-Z-M-A-N-A',
-        audio: 'zanahoria.mp3'
-    }
+  },
+  {
+    item: 'the carrot',
+    article: 'la',
+    word: 'zanahoria',
+    translation: 'la zanahoria',
+    hint: 'The translation contains the following letters N-A-Z-M-A-N-A',
+    audio: 'zanahoria.mp3'
+  }
 
 ];
