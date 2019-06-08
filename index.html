@@ -77,8 +77,6 @@
         <div class="col-sm mt-5 "><b><span id="item" aria-live="assertive" tabindex="0"></span></b></div>
       </div>
 
-
-
       <!---button to listen to the audio--->
       <div class="row">
         <button id="newFocus" aria-label="audio for pronounciation in Spanish" onclick="playSound()"
@@ -86,34 +84,30 @@
       </div>
 
       <!----inputfield -->
-
       <div class="row">
         <div class="col-lg-6 mx-auto mt-5 ">
 
           <!--- instruction above inputfield--->
-
           <p id="instructionInput"> Type the letter and press enter or the submit button</p>
           <div class="input-group">
-            <!----- article in front of inputfield---->
-            <input autocomplete="off" type="text" class="form-control" id="inputvalue" placeholder="your awnser"
+            <input autocomplete="off" type="text" class="form-control" id="inputvalue" placeholder="your answer"
               aria-label="your awnser" style="text-align: center">
-
           </div>
         </div>
       </div>
 
-      <!---button toggling a hint--->
-
       <div class="row">
         <div class=" toggletip-container">
-          <button type="button" id="hintButton" class="image-button">
-            <img src="help.png" alt="help-button"></button>
-          <div role="status"></div>
+          <button id="hintButton" class="btn btn-outline-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50.401" cy="37.282" r="3.506" fill="currentColor"/><path d="M50.401 19.842c17.629 0 31.972 14.343 31.972 31.972S68.03 83.786 50.401 83.786 18.428 69.444 18.428 51.814s14.343-31.972 31.973-31.972m0-3.552c-19.62 0-35.525 15.905-35.525 35.525S30.781 87.34 50.401 87.34s35.525-15.905 35.525-35.525S70.02 16.29 50.401 16.29z" fill="currentColor"/><path d="M47.914 45.569h4.973v24.284h-4.973z" fill="currentColor"/></svg>
+            I need help
+          </button>
+            <div role="status"></div>
         </div>
       </div>
 
       <div class="row row-submit">
-        <button id="button" class="btn btn-primary mt-5 " onclick="compareAwnser()"> Submit </button>
+        <button id="button" class="btn btn-primary mt-5 " onclick="compareAnswer()"> Submit </button>
       </div>
 
       <div id="overlay" class="feedback-sheet">
@@ -153,16 +147,9 @@
     integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
 
-
-
-
   <!----script--->
-
   <script type="text/javascript" src="items.js"></script>
   <script type="text/javascript" src="script.js"></script>
-
-
-
 </body>
 
 </html>

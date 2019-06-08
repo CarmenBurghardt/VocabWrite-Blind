@@ -45,15 +45,16 @@ h1 {
   padding: 0.75em 0.75em;
   font-weight: bold;
 
-
-
 }
 
 /**@resets button border */ 
-.image-button{
+
+.image-button {
 	padding: 0;
 	border: none;
 	background: none;
+	flex-grow: 0;
+	margin: 0 auto;
 }  
 
 /*styling of overlay*/
@@ -88,8 +89,8 @@ h1 {
 .toggletip-bubble {
 	font-size: 14px;
 	position: absolute;
-	left: -20%;
-	top: 30px;
+	left: 0;
+	top: 40px;
 	width: 10em;
 	padding: 0.5rem;
 	background: #f8f6b4;
@@ -97,12 +98,8 @@ h1 {
 }
 
 .row-submit {
-	margin: 40px auto;
 	justify-content: center;
 }
-
-
-
 
 .feedback-sheet {
 	position: fixed;
@@ -141,4 +138,14 @@ h1 {
 
 .feedback-sheet-text {
 	text-align: left !important;
+}
+
+.btn-outline-secondary {
+	display: inline-flex;
+	align-items: center;
+}
+
+.btn-outline-secondary svg {
+	width: 24px;
+	margin-right: 10px;
 }

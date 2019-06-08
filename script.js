@@ -227,6 +227,7 @@ function compareAnswer(){
 // Answers 
 
 function AwnserAlmostcorrect(corrPartWritten){
+  buttonTryAgain.classList.remove("btn-primary");
   onOverlay();
   if (missedArticle) {
     giveFeedback("You miss the article in front of the word");
@@ -244,6 +245,7 @@ function AwnserIsNotCorrect(){
   hideButton(button);
   onOverlay();
   giveFeedback("Not correct, but you are getting there, please try again ");
+  buttonTryAgain.classList.add("btn-primary");
   buttonTryAgain.innerHTML = "try again";
   buttonTryAgain.focus();
   buttonTryAgain.setAttribute('aria-label', 'Try again');
