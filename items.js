@@ -22,7 +22,7 @@ const items = [
     article: 'el',
     word: 'plátano',
     translation: 'el plátano',
-    hint: 'The translation contains the following letters O-P-L-Á-N-T-A-N ',
+    hint: 'The translation contains the following letters O-P-L-Á-T-A-N ',
     audio: 'platano.mp3'
   },
 
@@ -41,7 +41,7 @@ const items = [
     article: 'la',
     word: 'zanahoria',
     translation: 'la zanahoria',
-    hint: 'The translation contains the following letters N-A-Z-M-A-N-A',
+    hint: 'The translation contains the following letters Z-A-N-A-R-O-H-R-A-I',
     audio: 'zanahoria.mp3'
   }
 
