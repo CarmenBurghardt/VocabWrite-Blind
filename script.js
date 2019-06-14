@@ -182,51 +182,51 @@ skipButton.appendChild(button);
 tryAgainId.appendChild(buttonTryAgain);
 
 function compareAnswer(){
-  let correctAwnser = items[countItem].translation;
+  let correctAnswer = items[countItem].translation;
   let mistake = 0;
-  let submitAwnser = inputValue.value.split('');
+  let submitAnswer = inputValue.value.split('');
   let corrPartOfWord= '';
 
   // Mistakes
 
-  for (let i = 0; i < correctAwnser.length; i++){
-    if (correctAwnser[i] !== submitAwnser[i]) {
+  for (let i = 0; i < correctAnswer.length; i++){
+    if (correctAnswer[i] !== submitAnswer[i]) {
       mistake++;
-      mistakenLetters = submitAwnser[i];
+      mistakenLetters = submitAnswer[i];
       positionWrongLetter = i;
     }
 
     if (mistake == 0){
-      corrPartOfWord += submitAwnser[i] + ",";
-      if (submitAwnser[i] == " ") {
-        corrPartOfWord += submitAwnser[i] + " ";
+      corrPartOfWord += submitAnswer[i] + ",";
+      if (submitAnswer[i] == " ") {
+        corrPartOfWord += submitAnswer[i] + " ";
       }
     }
   }
 
   if (mistake == 1){
-    AwnserAlmostcorrect(corrPartOfWord);
+    AnswerAlmostcorrect(corrPartOfWord);
   }
 
   if (mistake == 0){
-    AwnserIsCorrect();
+    AnswerIsCorrect();
   }
 
-  if (mistake > 1 || correctAwnser.length !== submitAwnser.length){
+  if (mistake > 1 || correctAnswer.length !== submitAnswer.length){
     if (inputValue.value == items[countItem].word) {
       missedArticle = true;
-      AwnserAlmostcorrect();
+      AnswerAlmostcorrect();
       return;
     }
 
-    AwnserIsNotCorrect();
+    AnswerIsNotCorrect();
     return;
   }
 }
 
 // Answers 
 
-function AwnserAlmostcorrect(corrPartWritten){
+function AnswerAlmostcorrect(corrPartWritten){
   buttonTryAgain.classList.remove("btn-primary");
   onOverlay();
   if (missedArticle) {
@@ -234,14 +234,14 @@ function AwnserAlmostcorrect(corrPartWritten){
     missedArticle = false;
   }
   else {
-    giveFeedback(`You were almost correct. Please improve your awnser or press skip. This part of the awnser was correct: ${corrPartWritten}.`);
+    giveFeedback(`You were almost correct. Please improve your answer or press skip. This part of the answer was correct: ${corrPartWritten}.`);
   }
   button.innerHTML = "skip";
   buttonTryAgain.innerHTML = "try again";
   buttonTryAgain.focus();
 }
 
-function AwnserIsNotCorrect(){
+function AnswerIsNotCorrect(){
   hideButton(button);
   onOverlay();
   giveFeedback("Not correct, but you are getting there, please try again ");
@@ -251,11 +251,11 @@ function AwnserIsNotCorrect(){
   buttonTryAgain.setAttribute('aria-label', 'Try again');
 }
 
-function AwnserIsCorrect(){
+function AnswerIsCorrect(){
   document.getElementById("inputvalue").disabled = true;
   hideButton(buttonTryAgain);
   onOverlay();
-  giveFeedback("The awnser is correct, please press next");
+  giveFeedback("The answer is correct, please press next");
   button.innerHTML = "next";
   button.focus();
 }
